@@ -2,11 +2,13 @@
 	// Get real console, if it exists
 	var realConsole = window.console || null;
 
+	var fn = function(){};
+
 	// Create disabled console
 	var disabledConsole = {
-		log:   function() { return; },
-		warn:  function() { return; },
-		info:  function() { return; },
+		log: fn,
+		warn: fn,
+		info: fn,
 		enable: function(quiet){
 			window.dbg = realConsole ? realConsole : disabledConsole;
 			if (!quiet) window.dbg.log('dbg enabled.');
@@ -21,7 +23,7 @@
 		realConsole.disable = disabledConsole.disable;
 		realConsole.enable = disabledConsole.enable;
 	}
-	
+
 	// Setup dbg
 	disabledConsole.enable(true);
 })();
