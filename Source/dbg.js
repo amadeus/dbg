@@ -9,7 +9,7 @@
 				window.dbg = realConsole ? realConsole : disabledConsole;
 				if (!quiet) window.dbg.log('dbg enabled.');
 			},
-			disable:function(){
+			disable: function(){
 				window.dbg = disabledConsole;
 			}
 		};
