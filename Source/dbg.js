@@ -1,16 +1,17 @@
 (function(){
-	var realConsole = window.console || null,
+	var global = this,
+		realConsole = global.console || null,
 		fn = function(){},
 		disabledConsole = {
 			log: fn,
 			warn: fn,
 			info: fn,
 			enable: function(quiet){
-				window.dbg = realConsole ? realConsole : disabledConsole;
-				if (!quiet) window.dbg.log('dbg enabled.');
+				global.dbg = realConsole ? realConsole : disabledConsole;
+				if (!quiet) global.dbg.log('dbg enabled.');
 			},
 			disable: function(){
-				window.dbg = disabledConsole;
+				global.dbg = disabledConsole;
 			}
 		};
 
@@ -20,4 +21,4 @@
 	}
 
 	disabledConsole.enable(true);
-})();
+}).call(this);
