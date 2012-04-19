@@ -1,24 +1,36 @@
 (function(){
 	var global = this,
+		// Get the real console or set to null for easy boolean checks
 		realConsole = global.console || null,
+		// Backup / Disabled Lambda
 		fn = function(){},
+		// Supported console methods
+		methodNames = ['log', 'error', 'warn', 'info', 'count', 'debug', 'profileEnd', 'trace', 'dir', 'dirxml', 'assert', 'time', 'profile', 'timeEnd', 'group', 'groupEnd'],
+		// Disabled Console
 		disabledConsole = {
-			log: fn,
-			warn: fn,
-			info: fn,
+			// Enables dbg, if it exists, otherwise it just proveds disabled
 			enable: function(quiet){
 				global.dbg = realConsole ? realConsole : disabledConsole;
-				if (!quiet) global.dbg.log('dbg enabled.');
 			},
+			// Disable dbg
 			disable: function(){
 				global.dbg = disabledConsole;
 			}
 		};
 
+	// Setup disabled console and provide fallbacks on the real console
+	methodNames.forEach(function(name){
+		disabledConsole[name] = fn;
+		if (realConsole && !realConsole[name])
+			realConsole[name] = fn;
+	});
+
+	// Add enable/disable methods
 	if (realConsole) {
 		realConsole.disable = disabledConsole.disable;
 		realConsole.enable = disabledConsole.enable;
 	}
 
-	disabledConsole.enable(true);
+	// Enable dbg
+	disabledConsole.enable();
 }).call(this);
