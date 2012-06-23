@@ -38,14 +38,15 @@
 				global.dbg = disabledConsole;
 			}
 
-		};
+		}, name, i;
 
 	// Setup disabled console and provide fallbacks on the real console
-	methodNames.forEach(function(name){
+	for (i = 0; i < methodNames.length;i++){
+		name = methodNames[i];
 		disabledConsole[name] = fn;
 		if (realConsole && !realConsole[name])
 			realConsole[name] = fn;
-	});
+	}
 
 	// Add enable/disable methods
 	if (realConsole) {
