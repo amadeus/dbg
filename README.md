@@ -37,4 +37,4 @@ All log messages and utility methods will work on supporting browsers, those tha
 
 I will not provide any sort of fallback functionality for browsers that do not support console functionality as that is out of scope for this plugin. The intentions are simple: never cause a browser to throw an error with unsupported console.logs or related functions.
 
-License: [MIT-style licensea](http://en.wikipedia.org/wiki/MIT_License)
+License: [MIT-style license](http://en.wikipedia.org/wiki/MIT_License)
