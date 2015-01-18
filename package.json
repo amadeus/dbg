@@ -1,0 +1,19 @@
+{
+  "name": "dbg",
+  "version": "1.0.1",
+  "description": "A simple and lightweight console.log replacement with some extra bonuses",
+  "main": "dbg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amadeus/dbg.git"
+  },
+  "author": "Amadeus Demarzi <amadeusdemarzi@gmail.com> (http://amadeusamade.us)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amadeus/dbg/issues"
+  },
+  "homepage": "https://github.com/amadeus/dbg"
+}
