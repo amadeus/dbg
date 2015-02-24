@@ -1,11 +1,13 @@
 # dbg
 
+An easy to type `console` wrapper
 
-## Purpose
+## Features
 
-Provide an easy to type, safe for all browsers, and toggleable console wrapper.
-
-Yes, it preserves line numbers.
+* Simpler to type
+* Will fail silently on browsers or environments that don't support `console`
+* Can be enabled or disabled (useful in production)
+* Preserves line number
 
 
 ## Usage
@@ -17,24 +19,23 @@ Simply include dbg.js in your site and use any of the methods you wish:
     dbg.info('just check the source for all supported methods');
 
 
-### dbg.disable / dbg.enable
+### `dbg.disable` / `dbg.enable`
 
 By default, dbg is enabled, but you can disable dbg as shown below:
 
     dbg.disable();
 
-A disabled dbg will not print any methods or perform any utility functions like timing or profiling.
+A disabled dbg will never print any methods or perform any utility functions like
+timing or profiling.  Often it's useful to have an initialize check and disable
+dbg in production so you don't inadvertently spit out console messages or
+perform any sort of profiling in production.
 
-Enabling is only necessary if you disabled previously:
+Enabling is only necessary if you previously disabled:
 
     dbg.enable();
 
-All log messages and utility methods will work on supporting browsers, those that don't support them will simply execute silently.
+All log messages and utility methods will work on supporting browsers, those
+that don't support them will simply fail silently.
 
-
-
-### Notes:
-
-I will not provide any sort of fallback functionality for browsers that do not support console functionality as that is out of scope for this plugin. The intentions are simple: never cause a browser to throw an error with unsupported console.logs or related functions.
 
 License: [MIT-style license](http://en.wikipedia.org/wiki/MIT_License)
