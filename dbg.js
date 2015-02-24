@@ -1,60 +1,49 @@
 /*
  *
- *	name: dbg
+ *  name: dbg
  *
- *	description: A bad ass little console utility, check the README for deets
+ *  description: A bad ass little console utility, check the README for deets
  *
- *	license: MIT-style license
+ *  license: MIT-style license
  *
- *	author: Amadeus Demarzi
+ *  author: Amadeus Demarzi
  *
- *	provides: window.dbg
+ *  provides: window.dbg
  *
  */
 
 (function(){
 
-	var global = this,
+var console, methods, empty, i;
 
-		// Get the real console or set to null for easy boolean checks
-		realConsole = global.console || null,
+console = this.console || {};
 
-		// Backup / Disabled Lambda
-		fn = function(){},
+// Empty method used when dbg is disabled or console doesn't exist
+empty = function(){};
 
-		// Supported console methods
-		methodNames = ['log', 'error', 'warn', 'info', 'count', 'debug', 'profileEnd', 'trace', 'dir', 'dirxml', 'assert', 'time', 'profile', 'timeEnd', 'group', 'groupEnd'],
+// Supported console methods
+methods = 'debug,error,info,log,warn,dir,dirxml,table,trace,assert,count,markTimeline,profile,profileEnd,time,timeEnd,timeStamp,timeline,timelineEnd,group,groupCollapsed,groupEnd,clear'.split(',');
 
-		// Disabled Console
-		disabledConsole = {
+// Namespace
+this.dbg = ({
 
-			// Enables dbg, if it exists, otherwise it just provides disabled
-			enable: function(quiet){
-				global.dbg = realConsole ? realConsole : disabledConsole;
-			},
+	// Attaches console methods to dbg if they exist, otherwise fall back to
+	// the `empty` function. `bind` is required to avoid an Invalid Invocation error
+	enable: function(){
+		for (i = 0; i < methods.length; i++){
+			this[methods[i]] = console[name] ? console[name].bind(console) : empty;
+		}
+		return this;
+	},
 
-			// Disable dbg
-			disable: function(){
-				global.dbg = disabledConsole;
-			}
-
-		}, name, i;
-
-	// Setup disabled console and provide fallbacks on the real console
-	for (i = 0; i < methodNames.length;i++){
-		name = methodNames[i];
-		disabledConsole[name] = fn;
-		if (realConsole && !realConsole[name])
-			realConsole[name] = fn;
+	// Disable dbg
+	disable: function(){
+		for (i = 0; i < methods.length;i++){
+			this[methods[i]] = empty;
+		}
+		return this;
 	}
 
-	// Add enable/disable methods
-	if (realConsole) {
-		realConsole.disable = disabledConsole.disable;
-		realConsole.enable = disabledConsole.enable;
-	}
-
-	// Enable dbg
-	disabledConsole.enable();
+}).enable();
 
 }).call(this);
